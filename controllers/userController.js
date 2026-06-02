@@ -100,7 +100,11 @@ const loginUser = async (req, res) => {
         res.send({ type: "ERROR", message: "Invalid Password" });
         return;
       }
-      res.send({type: "SUCCESS",message: "User Login Successful",data: { id: find_user._id, email: find_user.email }});
+      res.send({
+        type: "SUCCESS",
+        message: "User Login Successful",
+        data: { id: find_user._id, fullname: find_user.first_name + " " + find_user.last_name, email: find_user.email },
+      });
     } else {
       res.send({ message: "Email and Password Required" });
     }
