@@ -100,4 +100,5 @@ module.exports = {
   deleteTodo,
   searchTodos,
   getTodoStats,
+  getAllTodos,
 };
