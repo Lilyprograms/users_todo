@@ -12,7 +12,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find({ userId: req.user.id }).sort({ createdAt: -1 });
+    const todos = await Todo.find({ userId: req.params.id }).sort({ createdAt: -1 });
     res.status(200).json({ success: true, count: todos.length, data: todos });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
