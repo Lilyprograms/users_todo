@@ -10,6 +10,15 @@ const createTodo = async (req, res) => {
   }
 };
 
+const getAllTodos = async (req, res) => {
+  try {
+    const todos = await Todo.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, count: todos.length, data: todos });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ userId: req.params.user_id }).sort({ createdAt: -1 });
@@ -52,7 +61,7 @@ const updateTodoStatus = async (req, res) => {
 
 const deleteTodo = async (req, res) => {
   try {
-    const todo = await Todo.findOneAndDelete({ _id: req.params.id});
+    const todo = await Todo.findOneAndDelete({ _id: req.params.id });
     if (!todo) return res.status(404).json({ success: false, message: "Todo not found" });
     res.status(200).json({ success: true, message: "Todo deleted successfully" });
   } catch (error) {
